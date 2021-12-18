@@ -1,32 +1,77 @@
 // BANK ACCOUNT
 
-// Start by creating the object and the properties. You can leave the functions empty for now if you want.
-// You'll find all the information about what properties the object should have in the readme file.
-
-// In the deposit and withdrawal function use this code to show the prompt
-parseFloat(prompt("Put some proper message here"));
-// You need to change the message of course. You should also do some research why parseFloat() is used here
-// answer by making a comment in the code.
-// Be aware of that you need to add some code to this so you can display the actual input.
-
-// In the deposit and withdrawal function you also need to handle som potential errors.
-// To handle one of the potential error you can use this piece of code
-isNaN(variableName);
-// you need to change the variableName to your actual variable.
-// you also need to check some other conditions here and use a logical operator.
-// try to say the sentece out loud or think it:
-// "A user should not be able to put 0 or negative numbers or empty string or a type that is not a number"
-// Do you know what operator you should use?
-
-// In the accountError and accountExit function you can use this to show a message to the user:
-alert("your code here and maybe properties");
-// of course you need to put a proper message and you might need to display some of the properties.
-
+const account = {
+  accountName: "Bonnie",
+  balance: 100,
+  getBalance: function () {
+    alert(`Your balance is ${this.balance} kronor`);
+    atm (); 
+  },
+  deposit: function () {
+    let depo = parseFloat(prompt
+    ("Please put the amount you would like to deposit")
+    );
+    if (depo >= 1) {
+      this.balance += depo;
+      this.getBalance();
+      atm();
+    }
+    else if (isNaN(depo) || depo <= 0) {
+      this.accountError();
+      this.deposit();
+    }
+  },
+  withdrawl: function () {
+    let withD = parseFloat(prompt("Please put the amount you would like to withdraw"));
+    if (withD > this.balance) {
+      alert(`Not enough funds. Your balance is ${this.balance}`);
+      atm();
+    }
+    else if (isNaN(withD) || withD <= 0) {
+      this.accountError();
+      atm();
+    }
+    else {
+      this.balance -= withD;
+      this.getBalance();
+    }
+    atm();
+  },
+  getAccountName: function () {
+    alert(`Account name: ${this.accountName}`);
+    atm();
+  },
+  accountError: function () {
+    alert("Unvalid input");
+  },
+  exitAccount: function () {
+    alert("Welcome back!");
+    window.close();
+  },
+};
 // STARTER FUNCTION
 function atm() {
-  let choice = parseInt(prompt("Display menu choices here"));
-  //prompt user for choice.
+  let choice = parseFloat(prompt("Select a choise 1.) See balance 2.)Make a deposit 3.)Make a withdrawl 4.) Get account name 5.) Exit"));
+    switch (choice) {
+      case 1:
+        account.getBalance();
+        break;
+      case 2:
+        account.deposit();
+        break;
+      case 3:
+        account.withdrawl();
+        break;
+      case 4:
+        account.getAccountName();
+        break;
+      case 5: 
+        account.exitAccount();
+        break;
+      default:
+        alert("Not a valid choise");     
+    }
+  }
+  atm ();
 
-  // you can use the variable choice for your switch or if/else statement
-  // so choice will hold the value of the user input.
-}
+  // I think we use parseFloat because we want the string the user inputs choise 1, 2, 3, 4, 5 to return as a number. 
